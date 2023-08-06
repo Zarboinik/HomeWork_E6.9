@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h2>All Chat Groups:</h2>
+<ul>
+    {% for group in groups %}
+    <li><a href="{% url 'chat:room' group.name %}">{{ group.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<a href="{{ create_group_url }}"><button>Create Group</button></a>
+<a href="/register/"><button>Register</button></a>
+<p></p>
+<h2>All Users:</h2>
+<ul>
+    {% for user in users %}
+    <li><a href="{% url 'chat:room' user.username %}">{{ user.username }}</a></li>
+    {% endfor %}
+</ul>
+<script></script>
+</body>
+</html>

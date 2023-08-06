@@ -1,0 +1,19 @@
+/* Остальные CSS стили, которые вы добавили */
+
+/* Добавляем стиль матрицы к фону страницы */
+body {
+    background-color: #000;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Стили для ссылок на странице, которые изменят их вид при наведении */
+a {
+    color: #33ccff;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #00ccff;
+}
