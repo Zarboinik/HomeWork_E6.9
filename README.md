@@ -13,3 +13,7 @@
 6 в отдельно терменале docker run --rm -p 6379:6379 redis:7
 
 7 py manage.py runserver
+
+
+если ругнётся установите ещё Pillow 
+python -m pip install Pillow
