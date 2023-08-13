@@ -130,3 +130,4 @@ dmypy.json
 .idea/
 cache_files/
 
+/backend/media/profile_images/*

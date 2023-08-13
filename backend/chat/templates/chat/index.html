@@ -6,15 +6,28 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h2>All Chat Groups:</h2>
-<ul>
-    {% for group in groups %}
-    <li><a href="{% url 'chat:room' group.name %}">{{ group.name }}</a></li>
-    {% endfor %}
-</ul>
+{% if user.is_authenticated %}
+    <h2>Welcome, {{ user.userprofile.full_name }}!</h2>
+{% if user.userprofile.profile_image %}
+    <img src="{{ user.userprofile.profile_image.url }}" alt="Profile Image" width="100">
+{% endif %}
 
-<a href="{{ create_group_url }}"><button>Create Group</button></a>
-<a href="/register/"><button>Register</button></a>
+    <a href="/edit-profile/"><button>Edit Profile</button></a>
+    <a href="/logout/"><button>Log out</button></a>
+    <p></p>
+    <h2>All Chat Groups:</h2>
+    <ul>
+        {% for group in groups %}
+        <li><a href="{% url 'chat:room' group.name %}">{{ group.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{{ create_group_url }}"><button>Create Group</button></a>
+{% else %}
+    <h2>You are not authenticated.</h2>
+    <a href="/register/"><button>Register</button></a>
+    <a href="/login/"><button>Log in</button></a>
+{% endif %}
+
 <p></p>
 <h2>All Users:</h2>
 <ul>

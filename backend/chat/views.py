@@ -1,10 +1,12 @@
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-from .forms import GroupForm
-from .models import Group
+from .forms import GroupForm, UserProfileForm
+from .models import Group, UserProfile
 
 
 def index(request):
@@ -42,3 +44,23 @@ def register_user(request):
     else:
         form = UserCreationForm()
     return render(request, 'chat/register.html', {'form': form})
+
+
+@login_required
+def edit_profile(request):
+    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = UserProfileForm(instance=user_profile)
+
+    return render(request, 'chat/edit_profile.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
